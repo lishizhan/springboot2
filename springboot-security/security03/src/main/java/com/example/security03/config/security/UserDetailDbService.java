@@ -35,6 +35,7 @@ public class UserDetailDbService implements UserDetailsService {
             throw  new UsernameNotFoundException("用户名不正确");
         }
 
+
         List<Role> roles = userMapper.getRoleById(user.getId());
         user.setRoles(roles);
         return user;
