@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatisplus.dao.PersonDao">
+
+    <!--
+    动态根据输入的属性值来动态生成插入语句：
+     insert语句中的 useGeneratedKeys="true" keyProperty="id" 表示
+     主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值，不是数据库表中的字段名
+    -->
+    <!--
+    trim标签一般用于去除sql语句中多余的and关键字，逗号，
+    或者给sql语句前拼接 “where“、“set“以及“values(“ 等前缀，或者添加“)“等后缀，
+    可用于选择性插入、更新、删除或者条件查询等操作
+    -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                `id`,
+            </if>
+            <if test="name !=null">
+                `name`,
+            </if>
+            <if test="age !=null">
+                `age`,
+            </if>
+            <if test="salary !=null">
+                `salary`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                #{id},
+            </if>
+            <if test="name !=null">
+                #{name},
+            </if>
+            <if test="age !=null">
+                #{age},
+            </if>
+            <if test="salary !=null">
+                #{salary},
+            </if>
+        </trim>
+    </insert>
+    <!--
+    批量插入
+    -->
+    <insert id="batchInsert" parameterType="list">
+        insert into person (`name`, age, salary)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name},#{item.age},#{item.salary})
+        </foreach>
+    </insert>
+
+
+    <update id="update">
+        update person
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="age !=null">
+                age = #{age},
+            </if>
+            <if test="salary !=null">
+                salary = #{salary}
+            </if>
+        </set>
+        where id = #{id};
+
+    </update>
+
+
+</mapper>

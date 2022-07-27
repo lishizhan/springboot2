@@ -1,0 +1,28 @@
+person:
+  username: zhans
+  boss: true
+  birth: 1998/08/08
+  age: 23
+#  interests: [游泳,游戏,篮球]
+  interests:
+    - 游泳
+    - 游戏
+    - 篮球
+  animal: [旺财,来福]
+#  score: {english:80,math: 90,yuwen: 100}
+  score:
+    english: 80
+    math: 90
+    yuwen: 100
+  salary:
+    - 9999.99
+    - 8888.88
+  pet:
+    name: 旺财
+
+    weight: 32.32
+  allPets:
+    white:
+      - {name: 旺财,weight: 33.33}
+    black:
+      - {name: 来福,weight: 44.44}

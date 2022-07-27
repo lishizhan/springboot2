@@ -1,0 +1,28 @@
+# mybatis plus 中的连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://192.168.8.200:3306/guli-college?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://42.194.140.137:3306/guli-college?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+# redis 服务器 ip spring.redis.host=192.168.200.129
+# redis 服务器端口 spring.redis.port=6379
+# redis 密码 #spring.redis.password=root
+# 连接超时时间（毫秒） spring.redis.timeout=60000
+# Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0 spring.redis.database=0
+  redis:
+    host: 42.194.140.137
+#    host: 192.168.8.200
+    port: 6379
+    password: lsz!@#$redis
+    timeout: 60000
+    database: 0
+#  mvc:
+#    static-path-pattern: /static/**
+# 日志打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

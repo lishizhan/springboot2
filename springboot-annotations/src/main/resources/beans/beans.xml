@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user01" class="com.example.annotations.beans.User">
+        <property name="name" value="lisi"/>
+        <property name="age" value="24"/>
+    </bean>
+    <bean id="tom01" class="com.example.annotations.beans.Pet">
+        <property name="name" value="tom01"/>
+        <property name="age" value="3"/>
+    </bean>
+</beans>

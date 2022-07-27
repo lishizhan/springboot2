@@ -1,0 +1,6 @@
+#配置静态资源访问前缀，这样在配置拦截器的时候就可以指定放行，配置这个会导致favicon.ico失效
+#spring:
+#  mvc:
+#    static-path-pattern: /res/**
+
+
