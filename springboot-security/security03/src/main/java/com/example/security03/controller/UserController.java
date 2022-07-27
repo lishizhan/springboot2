@@ -75,4 +75,13 @@ public class UserController {
         BeanUtils.copyProperties(roleVo,role);
         return roleService.save(role) ? R.ok() : R.error();
     }
+
+    /**
+     * 测试切换lishizhan-home
+     * */
+    @GetMapping("/test")
+    public R test(){
+        return R.ok("test 一下home分支");
+    }
+
 }
