@@ -13,6 +13,7 @@
   <modules>
     <module>security01</module>
     <module>security02-before-after</module>
+    <module>security03</module>
   </modules>
 
   <properties>
