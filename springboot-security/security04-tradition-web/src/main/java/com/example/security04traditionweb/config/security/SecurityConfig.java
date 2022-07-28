@@ -1,7 +1,11 @@
 package com.example.security04traditionweb.config.security;
 
+import com.example.security04traditionweb.service.UserService;
+import com.example.security04traditionweb.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.successForwardUrl("")
                 //.failureForwardUrl("")
                 .defaultSuccessUrl("/index.html")
+                .failureUrl("/login.html") //登录失败重定向到登录页面并显示错误信息，信息是放在session作用域中
                 .and()
                 .logout() //开启退出登陆
                 .logoutUrl("/logout")
@@ -62,8 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 指定数据库实现
      * */
+    //注入自己实现的UserDetailService
+    @Autowired
+    private UserServiceImpl userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
 }

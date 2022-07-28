@@ -56,6 +56,7 @@ public class User implements Serializable, UserDetails {
      */
     private Boolean enabled;
 
+    @TableField(exist = false)
     private List<Role> roles = new ArrayList<>();
 
     @TableField(exist = false)

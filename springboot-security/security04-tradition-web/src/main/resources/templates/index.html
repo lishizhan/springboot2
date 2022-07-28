@@ -92,8 +92,37 @@
         </div>
         <div class="col-md-4"></div>
     </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <ul class="list-group user-list">
+                <li class="list-group-item">Cras justo hhh</li>
+            </ul>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 </div>
+
 </body>
 <script th:src="@{/static/bootstrap/js/jquery.min.js}"></script>
 <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+<script !src="">
+    $(function (){
+        $.ajax({
+            url:"/user/users",
+            dataType:"json",
+            type:"get",
+            data:{},
+            success:function (res) {
+                console.log(res)
+            },
+            error:function (){
+                alert("failed")
+            }
+        })
+    })
+
+
+
+</script>
 </html>

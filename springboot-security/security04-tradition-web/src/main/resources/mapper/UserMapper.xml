@@ -19,4 +19,11 @@
         account_non_expired,account_non_locked,credentials_non_expired,
         enabled
     </sql>
+    <select id="getRoleById" resultType="com.example.security04traditionweb.entity.Role">
+        select r.id, r.name, r.name_zh
+        from role r
+                 join user_role ur on r.id = ur.rid
+        where ur.uid = #{uid};
+    </select>
+
 </mapper>

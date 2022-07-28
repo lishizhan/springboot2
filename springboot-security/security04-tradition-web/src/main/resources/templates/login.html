@@ -13,6 +13,8 @@
 <div class="container">
     <form class="form-signin" method="post" th:action="@{/doLogin}">
         <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="alert alert-danger" role="alert" th:if="${session.SPRING_SECURITY_LAST_EXCEPTION !=null}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION}">
+        </div>
         <label for="username" class="sr-only">Email address</label>
         <input type="text" id="username" name="username" class="form-control" placeholder="username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
