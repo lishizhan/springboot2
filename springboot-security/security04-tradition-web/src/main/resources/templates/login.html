@@ -8,6 +8,18 @@
     <link rel="stylesheet" th:href="@{/static/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/static/css/my.css}">
     <title>登陆页</title>
+    <style>
+        #username{
+            margin-bottom: 10px;
+        }
+        .media{
+            margin-bottom: 10px;
+        }
+        .media-left{
+            padding-right: 0px!important;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container">
@@ -19,14 +31,30 @@
         <input type="text" id="username" name="username" class="form-control" placeholder="username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <div class="media">
+            <div class="media-left">
+                <input type="text" id="code" name="code" class="form-control" placeholder="验证码" required autofocus>
+            </div>
+            <div class="media-right">
+                <a type="button" class="captcha">
+                    <img class="media-object captcha-img"  th:src="@{/captcha}" alt="获取验证密码失败">
+                </a>
+            </div>
+
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 
 </div> <!-- /container -->
 </body>
+<script th:src="@{/static/bootstrap/js/jquery.min.js}"></script>
+<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+<script !src="">
+    $(function (){
+        $(".captcha-img").click(function () {
+            let date = new Date().valueOf();
+            $(this).attr("src","/captcha?t="+date)
+        })
+    })
+</script>
 </html>
