@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //登陆成功或失败的返回路径
                 //.successForwardUrl("")
                 //.failureForwardUrl("")
-                .defaultSuccessUrl("/index.html")
+                .defaultSuccessUrl("/index.html",true)
                 .failureUrl("/login.html") //登录失败重定向到登录页面并显示错误信息，信息是放在session作用域中
                 .and()
                 .logout() //开启退出登陆
