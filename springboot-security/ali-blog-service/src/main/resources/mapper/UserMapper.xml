@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lishizhan.aliblog.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.lishizhan.aliblog.entity.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="accountNonExpired" column="account_non_expired" jdbcType="BOOLEAN"/>
+            <result property="accountNonLocked" column="account_non_locked" jdbcType="BOOLEAN"/>
+            <result property="credentialsNonExpired" column="credentials_non_expired" jdbcType="BOOLEAN"/>
+            <result property="enabled" column="enabled" jdbcType="BOOLEAN"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="recommend" column="recommend" jdbcType="VARCHAR"/>
+            <result property="birthday" column="birthday" jdbcType="DATE"/>
+            <result property="aliScore" column="ali_score" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,phone,password,
+        account_non_expired,account_non_locked,credentials_non_expired,
+        enabled,email,nickname,
+        create_time,update_time,recommend,
+        birthday,ali_score
+    </sql>
+</mapper>
