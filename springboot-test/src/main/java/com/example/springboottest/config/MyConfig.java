@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Import;
 
 //@Import({Animal.class,User.class}) //给容器中自动创建出这两个类型的组件、默认组件的名字就是全类名
 //告诉Spring Boot 这是一个配置类
-//@Configuration(proxyBeanMethods = true)
+@Configuration(proxyBeanMethods = true)
 public class MyConfig {
 
     @Bean //给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例

@@ -3,6 +3,7 @@ package com.example.springboottest.config;
 import com.example.springboottest.bean.Person;
 import com.example.springboottest.bean.Pet;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author : Alishiz
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Bean;
  * @email : 1575234570@qq.com
  * @Description :
  */
-//@Configuration(proxyBeanMethods = true)
+@Configuration(proxyBeanMethods = true)
 public class FullAndLifeConfiguration {
 
     @Bean

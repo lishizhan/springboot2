@@ -15,6 +15,7 @@
     <module>security02-before-after</module>
     <module>security03</module>
     <module>security04-tradition-web</module>
+    <module>security05-before-after</module>
   </modules>
 
   <properties>
