@@ -25,5 +25,4 @@
                  join user_role ur on r.id = ur.rid
         where ur.uid = #{uid};
     </select>
-
 </mapper>

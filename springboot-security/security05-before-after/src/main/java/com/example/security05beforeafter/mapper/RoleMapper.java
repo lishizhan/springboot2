@@ -4,7 +4,7 @@ import com.example.security05beforeafter.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * @Entity com.example.security04traditionweb.entity.Role
+ * @Entity com.example.security05beforeafter.entity.Role
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
