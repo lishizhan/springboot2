@@ -17,6 +17,7 @@
     <module>security04-tradition-web</module>
     <module>security05-before-after</module>
     <module>ali-blog-service</module>
+    <module>security06-debug</module>
   </modules>
 
   <properties>
