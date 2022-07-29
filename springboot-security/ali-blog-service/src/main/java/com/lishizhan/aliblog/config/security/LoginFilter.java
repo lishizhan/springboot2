@@ -1,7 +1,9 @@
 package com.lishizhan.aliblog.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lishizhan.aliblog.exception.CodeErrException;
 import lombok.Data;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -33,6 +35,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private String phoneParameter = PHONE_PARAMETER;
     private String codeParameter = code_PARAMETER;
 
+    @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         //1，判断是否是post
@@ -41,23 +44,27 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
         //2，判断是否是json
         if (request.getContentType().equalsIgnoreCase(MediaType.APPLICATION_JSON_VALUE)) {
-            //3，从json中获取用输入的手机号或邮箱和密码
-            try {
-                Map<String, String> userInfo = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-                String phone = userInfo.get(getPhoneParameter());
-                String email = userInfo.get(getEmailParameter());
-                String password = userInfo.get(getPasswordParameter());
-                String code = userInfo.get(getCodeParameter());
+            //3，从json中获取用输入的手机号或邮箱和密码和验证码
+            Map<String, String> userInfo = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            String phone = userInfo.get(getPhoneParameter());
+            String email = userInfo.get(getEmailParameter());
+            String password = userInfo.get(getPasswordParameter());
+            String code = userInfo.get(getCodeParameter());
+            if (code == null) throw new CodeErrException("验证码不能为空");
+            //获取session
+            String sessionCode = (String) request.getSession().getAttribute(getCodeParameter());
+            //用户输入的验证码与session中存储的验证码进行比较
+            if (!ObjectUtils.isEmpty(code) && !ObjectUtils.isEmpty(sessionCode) && code.equalsIgnoreCase(sessionCode)) {
                 String username = null;
                 if (!ObjectUtils.isEmpty(phone)) username = phone;
                 if (!ObjectUtils.isEmpty(email)) username = email;
-                log.info("LoginFilter-->attemptAuthentication--->用户：{}，手机号：{}，邮箱：{}，密码：{}", username, phone, email, password);
+                log.info("LoginFilter-->attemptAuthentication--->用户：{}，手机号：{}，邮箱：{}，密码：{}，验证吗：{}", username, phone, email, password, code);
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
                 setDetails(request, token);
                 return this.getAuthenticationManager().authenticate(token);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
+            //图形验证码不匹配异常
+            throw new CodeErrException("验证码错误");
         }
         //如果用户提交的不是json数据那么就交给父类去处理
         return super.attemptAuthentication(request, response);

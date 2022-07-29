@@ -39,11 +39,11 @@ public class UserDtoService implements UserDetailsService {
         User user = null;
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         //判断是否为手机号登陆
-        if (RegexUtils.isPhoneInvalid(s)) {
+        if (!RegexUtils.isPhoneInvalid(s)) {
              user = userMapper.selectOne(wrapper.eq(User::getPhone, s));
         }
         //判断是否为邮箱登陆
-        if (RegexUtils.isEmailInvalid(s)) {
+        if (!RegexUtils.isEmailInvalid(s)) {
             user = userMapper.selectOne(wrapper.eq(User::getEmail,s));
         }
         //用户不存在

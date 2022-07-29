@@ -1,5 +1,6 @@
 package com.example.security04traditionweb.config.security.filter;
 
+import lombok.Data;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.core.Authentication;
@@ -16,17 +17,11 @@ import javax.servlet.http.HttpServletResponse;
  * @description: 自定义验证码过滤
  * @date 2022/7/28 17:05
  */
+@Data
 public class CaptchaFilter extends UsernamePasswordAuthenticationFilter {
     public static final String CAPTCHA_KEY = "code";
     private String captcha = CAPTCHA_KEY;
 
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
-    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {

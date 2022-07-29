@@ -3,6 +3,7 @@ package com.example.security04traditionweb.config.security;
 import com.example.security04traditionweb.config.security.filter.CaptchaFilter;
 import com.example.security04traditionweb.service.UserService;
 import com.example.security04traditionweb.service.impl.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ import java.io.IOException;
  * @Description : Spring security 的相关配置
  */
 @Configuration
+@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -57,8 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         captchaFilter.setAuthenticationFailureHandler((request, response, e) -> {
             response.sendRedirect("/login.html");
         });
-
-
         return captchaFilter;
     }
 
@@ -83,6 +83,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login.html") //退出成功跳转登陆界面
                 .and()
+                //记住我 ,在表单中的input中的name=remember-me value有可选值yes/on/1/true
+                .rememberMe().rememberMeParameter("remember-me")
+                .and()
                 .csrf().disable();
         //at 对某个过滤器链中的过滤器进行替换，before/alter:表示放在那个过滤器之前或之后
         //这样写就实现了替换之前的表单认证过滤器
@@ -91,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/static/**","/captcha");
+        web.ignoring().mvcMatchers("/static/**", "/captcha");
     }
 
 
@@ -107,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }*/
     /**
      * 指定数据库实现
-     * */
+     */
     //注入自己实现的UserDetailService
     @Autowired
     private UserServiceImpl userDetailsService;
