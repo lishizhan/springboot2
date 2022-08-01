@@ -18,6 +18,7 @@
     <module>security05-before-after</module>
     <module>ali-blog-service</module>
     <module>security06-debug</module>
+    <module>security07</module>
   </modules>
 
   <properties>
