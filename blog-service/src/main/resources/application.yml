@@ -1,0 +1,40 @@
+# mybatis plus 中的连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://42.194.140.137:3306/aliblog?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
+  #文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+
+  redis:
+    host: 42.194.140.137
+    port: 6379
+    password: lsz!@#$redis
+    timeout: 60000
+    database: 1
+#  mvc:
+#    static-path-pattern: /static/**
+# 日志打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      #逻辑删除
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      #id自增长
+      id-type: auto
