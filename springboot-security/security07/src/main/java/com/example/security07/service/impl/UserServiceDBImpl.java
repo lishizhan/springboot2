@@ -2,6 +2,7 @@ package com.example.security07.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.security07.dto.UserDto;
+import com.example.security07.entity.Role;
 import com.example.security07.entity.User;
 import com.example.security07.mapper.UserMapper;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -40,7 +42,11 @@ public class UserServiceDBImpl implements UserDetailsService {
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUsername, s));
         if (Objects.isNull(user)) throw new UsernameNotFoundException("用户或错误");
         //TODO 查询用户权限
+        List<Role> roles = userMapper.getRoleById(user.getId());
         //返回UserDetails的自定义实现类
-        return new UserDto(user);
+        UserDto userDto = new UserDto();
+        userDto.setUser(user);
+        userDto.setRoles(roles);
+        return userDto;
     }
 }

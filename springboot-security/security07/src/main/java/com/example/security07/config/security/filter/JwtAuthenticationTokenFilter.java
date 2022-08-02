@@ -12,6 +12,7 @@ import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -22,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -62,7 +64,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             });
             //存入SecurityContextHolder
             //TODO 获取权限信息封装：authorities
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDto, null, null);
+            //因为用户的信息已经存入redis中，所以可以直接取
+            Collection<? extends GrantedAuthority> authorities = userDto.getAuthorities();
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDto, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
             //放行
