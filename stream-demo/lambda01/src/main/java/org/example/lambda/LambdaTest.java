@@ -10,12 +10,13 @@ import java.util.function.IntBinaryOperator;
  */
 public class LambdaTest {
     public static void main(String[] args) {
-        int i = calculateNum((left, right) -> 0);
+        int i = calculateNum((left, right) -> left-right);
+        System.out.println("i = " + i);
     }
 
     public static int calculateNum(IntBinaryOperator operator){
         int a = 20;
-        int b = 20;
+        int b = 10;
         return operator.applyAsInt(a,b);
     }
 }
