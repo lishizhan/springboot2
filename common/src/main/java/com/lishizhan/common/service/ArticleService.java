@@ -1,6 +1,7 @@
 package com.lishizhan.common.service;
 
-import com.lishizhan.common.domain.Article;
+import com.lishizhan.common.domain.ResponseResult;
+import com.lishizhan.common.domain.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,6 +14,6 @@ public interface ArticleService extends IService<Article> {
     /**
      * 查询当前热度最高的博客
      * */
-    String articleListHot();
+    ResponseResult articleListHot();
 
 }

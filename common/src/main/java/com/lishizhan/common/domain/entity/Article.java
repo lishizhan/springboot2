@@ -1,14 +1,21 @@
-package com.lishizhan.common.domain;
+package com.lishizhan.common.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
  * @TableName ali_article
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName(value = "ali_article")
 public class Article implements Serializable {
     /**
      * 
