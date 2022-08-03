@@ -1,6 +1,7 @@
 package com.example.security07.config.security;
 
 import com.example.security07.config.security.filter.JwtAuthenticationTokenFilter;
+import com.example.security07.config.security.filter.MyFilter;
 import com.example.security07.vo.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,6 +33,7 @@ import java.io.PrintWriter;
  * @Description :
  */
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true) //开启访问权限控制
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -39,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    private MyFilter myFilter;
 
     /**
      * 更换密码加密
@@ -72,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //添加token 过滤
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
+        http.addFilterBefore(myFilter,JwtAuthenticationTokenFilter.class);
         //退出登陆
 
 
@@ -89,6 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 //认证异常
                 .authenticationEntryPoint((request, response, e) -> {
+
                     response.setCharacterEncoding("UTF-8");
 //                    response.setContentType("application/json");
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);//"application/json"
@@ -96,7 +102,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     writer.write(new ObjectMapper().writeValueAsString(R.error(HttpStatus.UNAUTHORIZED.value(), "未登陆请登录")));
                     writer.flush();
                     writer.close();
-
                 });
     }
 }

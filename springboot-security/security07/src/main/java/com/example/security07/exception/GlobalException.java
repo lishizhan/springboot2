@@ -39,11 +39,12 @@ public class GlobalException  {
     /**
      * 运行时异常处理
      */
-    @ExceptionHandler(RuntimeException.class)
+   /* @ExceptionHandler(RuntimeException.class)
     public R runtimeExceptionHandler(RuntimeException e) {
+        e.printStackTrace();
         log.error("RuntimeException：{}", e.getMessage());
         return R.error("系统异常");
-    }
+    }*/
 
 
 }

@@ -11,6 +11,7 @@ import com.example.security07.service.UserService;
 import com.example.security07.mapper.UserMapper;
 import com.example.security07.utils.JWTUtil;
 import com.example.security07.vo.R;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -57,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String token = JWTUtil.getToken(map);
 
         //将用户信息存入Redis
-        stringRedisTemplate.opsForValue().set(RedisConstants.LOGIN_USER_KEY + userId, JSON.toJSONString(UserDto));
+        stringRedisTemplate.opsForValue().set(RedisConstants.LOGIN_USER_KEY + userId, JSON.toJSONString(UserDto),1, TimeUnit.HOURS);
         //根据用户id生成的token返回给前端
         return R.ok().put("token", token);
     }
