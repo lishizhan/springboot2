@@ -17,30 +17,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.authorizeRequests()
+                .antMatchers("/index/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .and()
+                .csrf().disable();
     }
 
-    @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return super.userDetailsServiceBean();
-    }
-    
-    @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-
-        return super.authenticationManager();
-    }
 }

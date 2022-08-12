@@ -17,7 +17,7 @@ public class LoginController {
 
     @PostMapping("login")
     public ResultVo login(){
-        return ResultVo.ok();
+        return ResultVo.ok("登陆成功");
     }
 
 }
