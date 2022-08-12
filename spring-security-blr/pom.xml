@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo01-hello-security</module>
+        <module>demo02-security-web</module>
+        <module>demo03-security-serve</module>
     </modules>
 
     <properties>
