@@ -1,4 +1,4 @@
-package com.example.demo02.vo;
+package com.example.demo03.vo;
 
 import org.springframework.http.HttpStatus;
 
@@ -42,6 +42,12 @@ public class ResultVo extends HashMap<String, Object> {
 
     public static ResultVo ok(Object data) {
         ResultVo r = new ResultVo();
+        r.put("data", data);
+        return r;
+    }
+    public static ResultVo ok(String msg,Object data) {
+        ResultVo r = new ResultVo();
+        r.put("msg", msg);
         r.put("data", data);
         return r;
     }

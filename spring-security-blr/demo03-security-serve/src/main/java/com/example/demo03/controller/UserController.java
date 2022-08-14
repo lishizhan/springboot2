@@ -1,16 +1,18 @@
-package com.example.demo02.controller;
+package com.example.demo03.controller;
 
 
-import com.example.demo02.entity.dto.UserDto;
-import com.example.demo02.service.UserService;
-import com.example.demo02.vo.ResultVo;
-import lombok.AllArgsConstructor;
+import com.example.demo03.entity.dto.UserDto;
+import com.example.demo03.service.UserService;
+import com.example.demo03.vo.ResultVo;
+import javafx.geometry.Pos;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author : lishizhan
@@ -33,6 +35,11 @@ public class UserController {
         UserDto userDto = (UserDto) authentication.getPrincipal();
         return ResultVo.ok().put("data", authentication).put("Principal",userDto);
     }
+
+
+
+
+
     @GetMapping("/getUserById/{id}")
     public ResultVo getUserById(@PathVariable("id") Long id){
         return ResultVo.ok(userService.getById(id));

@@ -1,0 +1,5 @@
+# 修改session超时时间
+server:
+  servlet:
+    session:
+      timeout: 2

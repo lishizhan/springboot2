@@ -60,12 +60,13 @@
     <form class="form-signin" th:action="@{/doLogin}" method="post">
         <h2 class="form-signin-heading">欢迎登录...</h2>
         <label for="uname" class="sr-only">用户名</label>
-        <input type="text" id="uname" name="uname" value="zhans" class="form-control" placeholder="请输入用户名" required autofocus>
+        <input type="text" id="uname" name="uname" value="blr"  class="form-control" placeholder="请输入用户名" required autofocus>
+        <br>
         <label for="pwd" class="sr-only">密码</label>
-        <input type="password" id="pwd" name="pwd" value="123123" class="form-control" placeholder="请输入密码" required>
+        <input type="password" id="pwd" name="pwd" value="lishizhan"  class="form-control" placeholder="请输入密码" required>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> 记住我
+                <input type="checkbox" name="remember-me" value="true"> 记住我
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>

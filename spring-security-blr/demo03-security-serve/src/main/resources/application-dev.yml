@@ -1,0 +1,33 @@
+# mybatis plus 中的连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://42.194.140.137:18666/blr?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: $10$ogvUqZ1Z
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 120000
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
+  redis:
+    # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 2
+    # redis服务器地址（默认为localhost）
+    host: 42.194.140.137
+    # redis端口（默认为6379）
+    port: 18665
+    # redis访问密码（默认为空）
+    password: $10$ogvUqZ1Z
+    # redis连接超时时间（单位为毫秒）
+    timeout: 10000ms
+
+
+#  mvc:
+#    static-path-pattern: /static/**
+# 日志打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
