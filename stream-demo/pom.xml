@@ -12,6 +12,7 @@
         <module>stream01</module>
         <module>lambda01</module>
         <module>Optional-demo</module>
+        <module>stream-new</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
