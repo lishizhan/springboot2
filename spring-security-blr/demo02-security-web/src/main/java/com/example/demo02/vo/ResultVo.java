@@ -40,6 +40,13 @@ public class ResultVo extends HashMap<String, Object> {
         return r;
     }
 
+    public static ResultVo ok(Object data) {
+        ResultVo r = new ResultVo();
+        r.put("data", data);
+        return r;
+    }
+
+
     public static ResultVo ok(Map<String, Object> map) {
         ResultVo r = new ResultVo();
         r.putAll(map);
