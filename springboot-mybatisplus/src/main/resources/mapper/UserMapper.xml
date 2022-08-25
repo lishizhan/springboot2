@@ -4,4 +4,8 @@
     <select id="selectUserById" resultType="com.example.mybatisplus.entity.User">
         select `id`,`name`,`age`,`email` from user where `id`=#{id}
     </select>
+    <select id="selectMyWrapper" resultType="com.example.mybatisplus.entity.User">
+        select *
+        from user ${ew.customSqlSegment}
+    </select>
 </mapper>

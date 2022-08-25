@@ -6,25 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/static/bootstrap/css/bootstrap.min.css}" crossorigin="anonymous">
     <title>springboot-mybatisplus</title>
 </head>
 <body>
-<form action="/user" method="post">
-    <input type="text" name="name">
-    <br>
-    <input type="text" name="age">
-    <br>
-    <input type="text" name="email">
-    <br>
-    <input type="submit" value="提交">
-</form>
-<div>
-    <!-- Standard button -->
-    <button type="button" class="btn btn-default">（默认样式）Default</button>
-    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-    <button type="button" class="btn btn-primary">（首选项）Primary</button>
-</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <button type="button" class="btn btn-primary">获取</button>
+    </li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Morbi leo risus</li>
+    <li class="list-group-item">Porta ac consectetur ac</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+</ul>
 
 </body>
 </html>

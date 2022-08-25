@@ -52,6 +52,39 @@
                  join departments d on d.department_id = e.department_id
         group by e.department_id
     </select>
+    <!--非等值连接：查询员工的姓名、工资、工资等级-->
+    <select id="notEqPage" resultType="com.example.mybatisplus.entity.vo.EmpNameAndSalaryAndGradeLevelVo">
+        select e.last_name as lastName,
+               e.salary as salary,
+               jg.grade_level as gradeLevel
+        from employees e,
+             job_grades jg
+        where e.salary between jg.lowest_sal and jg.highest_sal
+        order by jg.grade_level asc
+    </select>
+    <select id="epPage" resultType="com.example.mybatisplus.entity.vo.EmpNameAndDeptNameVo">
+        select e.last_name as lastName,
+               d.department_name as departmentName
+        from employees e,
+             departments d
+        where e.department_id = d.department_id
+    </select>
+    <select id="epPage2" resultType="com.example.mybatisplus.entity.vo.EmpNameAndJobIdAndJobTitleVo">
+        select e.last_name, j.job_id, j.job_title
+        from employees e,
+             jobs j
+        where e.job_id = j.job_id
+    </select>
+    <select id="epPage3" resultType="com.example.mybatisplus.entity.vo.EmpNameAndDeptNameVo">
+        select e.last_name,d.department_name
+        from employees e,departments d
+        where e.department_id=d.department_id and e.commission_pct is not null
+    </select>
+    <select id="selectParamsOne" resultType="com.example.mybatisplus.entity.EmployeesEntity">
+        select *
+        from employees
+        where last_name = ${name};
+    </select>
 
 
 </mapper>
