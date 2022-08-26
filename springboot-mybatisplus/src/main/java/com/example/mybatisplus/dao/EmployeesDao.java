@@ -3,14 +3,18 @@ package com.example.mybatisplus.dao;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mybatisplus.entity.EmployeesEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.mybatisplus.entity.vo.CityDeptCountVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndDeptNameVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndJobIdAndJobTitleVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndSalaryAndGradeLevelVo;
 import com.example.mybatisplus.vo.DeptAvgVo;
 import com.example.mybatisplus.vo.EmpAndDeptVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -64,5 +68,26 @@ public interface EmployeesDao extends BaseMapper<EmployeesEntity> {
      * @param lastName
      * @return
      */
-    EmployeesEntity selectParamsOne(String lastName);
+    EmployeesEntity selectParamsOne(Integer lastName);
+
+    /**
+     * 传递一个Map参数
+     * @param map
+     * @return
+     */
+    EmployeesEntity selectParamsMapOne(@Param("map") Map<String, Object> map);
+
+    /**
+     * 传递一个集合
+     * @param ids
+     * @return
+     */
+    List<EmployeesEntity> selectParamsCollect(@Param("ids") Collection<Integer> ids);
+
+    /**
+     * 查询每个城市的部门个数
+     * @return
+     */
+    List<CityDeptCountVo> selectCityDeptCount();
+
 }

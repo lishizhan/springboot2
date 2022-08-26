@@ -83,7 +83,24 @@
     <select id="selectParamsOne" resultType="com.example.mybatisplus.entity.EmployeesEntity">
         select *
         from employees
-        where last_name = ${name};
+        where employee_id = #{id}
+    </select>
+    <select id="selectParamsMapOne" resultType="com.example.mybatisplus.entity.EmployeesEntity">
+        select *
+        from employees e
+        where e.employee_id=#{map.employeeId} and last_name=#{map.lastName}
+    </select>
+    <select id="selectParamsCollect" resultType="com.example.mybatisplus.entity.EmployeesEntity">
+        select *
+        from employees
+        where employee_id in (#{ids[0]}, #{ids[1]},#{ids[2]})
+    </select>
+    <select id="selectCityDeptCount" resultType="com.example.mybatisplus.entity.vo.CityDeptCountVo">
+        select l.city as `city`, count(d.department_id) as `countDeptNum`
+        from locations l,
+             departments d
+        where l.location_id = d.location_id
+        group by l.city
     </select>
 
 

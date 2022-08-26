@@ -10,6 +10,7 @@ import com.example.mybatisplus.entity.EmployeesEntity;
 import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.entity.dto.BaseQueryDto;
 import com.example.mybatisplus.entity.dto.FilterQueryPageDto;
+import com.example.mybatisplus.entity.vo.CityDeptCountVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndDeptNameVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndJobIdAndJobTitleVo;
 import com.example.mybatisplus.entity.vo.EmpNameAndSalaryAndGradeLevelVo;
@@ -232,6 +233,43 @@ public class SelectController {
         //page=employeesDao.epPage4(page);
         return  R.ok(page);
     }
+    /**
+     * SQL 92,等值连接
+     * 加入分组:
+     *      查询每个城市的部门个数
+     *      查询有奖金的每个部门的部门名和部门的领导编号和该部门的最低工资
+     */
+    @GetMapping("eqGroupBy")
+    public R eqGroupBy(){
+        /**查询每个城市的部门个数
+         * select l.city as `city`, count(d.department_id) as `countDeptNum`
+         * from locations l,
+         *      departments d
+         * where l.location_id = d.location_id
+         * group by l.city
+         */
+        List<CityDeptCountVo> countVos = employeesDao.selectCityDeptCount();
+
+        /**
+         * 查询有奖金的每个部门的部门名和部门的领导编号和该部门的最低工资
+         * select d.department_name, d.manager_id, MIN(e.salary)
+         * from departments d,
+         *      employees e
+         * where d.department_id = e.department_id
+         *   and e.commission_pct is not null
+         * group by d.department_id
+         */
+        return R.ok(countVos);
+    }
+
+    /**
+     * 总结：sql92语法的等值连接
+     * 1，多表等值连接的结果为多表的交集部分
+     * 2，n表连接至少需要n-1个连接条件
+     * 3，多表的顺序没有要求
+     * 4，一般需要为表起别名
+     * 5，可以搭配所有的子句使用，如：排序、分组、筛选等
+     * */
 
 
 
