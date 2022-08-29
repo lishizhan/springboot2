@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplus.dao.AssetsRelationMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.mybatisplus.entity.AssetsRelation">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="facCode" column="fac_code" jdbcType="VARCHAR"/>
+            <result property="facRelation" column="fac_relation" jdbcType="VARCHAR"/>
+            <result property="stationCode" column="station_code" jdbcType="VARCHAR"/>
+            <result property="isDelete" column="is_delete" jdbcType="BOOLEAN"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,fac_code,fac_relation,
+        station_code,is_delete,create_by,
+        update_by,create_time,update_time
+    </sql>
+
+    <select id="selectRelFac" resultType="com.example.mybatisplus.entity.AssetsRelation">
+        select rel.id, rel.fac_code,fac.name as facName, rel.fac_relation, rel.station_code
+        from mgt_assets_relation rel
+                 left join mgt_fac_inst_info fac on rel.fac_code=fac.code
+        <where>
+            rel.station_code =#{station}
+            <if test="filter !=null">
+                and fac.name like concat('%',#{filter},'%');
+            </if>
+        </where>
+    </select>
+    <select id="selectRelationNameByRelationAttr" resultType="java.lang.String">
+        select name
+        from mgt_fac_inst_info
+        where code
+        in
+        <foreach collection="array" item="code" open="(" close=")" separator=",">
+            #{code}
+        </foreach>
+    </select>
+</mapper>

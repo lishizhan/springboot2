@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplus.dao.FacInstInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.mybatisplus.entity.FacInstInfo">
+            <id property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="englishName" column="english_name" jdbcType="VARCHAR"/>
+            <result property="modelNumber" column="model_number" jdbcType="VARCHAR"/>
+            <result property="purpose" column="purpose" jdbcType="VARCHAR"/>
+            <result property="technicalIndex" column="technical_index" jdbcType="VARCHAR"/>
+            <result property="monitorType" column="monitor_type" jdbcType="VARCHAR"/>
+            <result property="stationCode" column="station_code" jdbcType="VARCHAR"/>
+            <result property="stationName" column="station_name" jdbcType="VARCHAR"/>
+            <result property="fieldCode" column="field_code" jdbcType="VARCHAR"/>
+            <result property="fieldName" column="field_name" jdbcType="VARCHAR"/>
+            <result property="plotCode" column="plot_code" jdbcType="VARCHAR"/>
+            <result property="plotName" column="plot_name" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="establishTime" column="establish_time" jdbcType="TIMESTAMP"/>
+            <result property="lon" column="lon" jdbcType="DOUBLE"/>
+            <result property="lat" column="lat" jdbcType="DOUBLE"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="lastTime" column="last_time" jdbcType="TIMESTAMP"/>
+            <result property="maiCount" column="mai_count" jdbcType="INTEGER"/>
+            <result property="preTime" column="pre_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        code,name,type,
+        sort,english_name,model_number,
+        purpose,technical_index,monitor_type,
+        station_code,station_name,field_code,
+        field_name,plot_code,plot_name,
+        status,establish_time,lon,
+        lat,create_by,update_by,
+        create_time,update_time,last_time,
+        mai_count,pre_time
+    </sql>
+</mapper>
